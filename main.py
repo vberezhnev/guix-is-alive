@@ -1,6 +1,4 @@
-#!/usr/bin/env nix-shell
-#!nix-shell -i python3 -p "python3.withPackages (ps: with ps; [ aiohttp ])" -p pyright ruff
-# Copyright (C) 2024 Radik Islamov <vizid1337@gmail.com>
+# Copyright (C) 2024 Vladimir Berezhnev <vberezhnev@proton.me>
 # SPDX-License-Identifier: MIT
 
 import asyncio
@@ -8,12 +6,15 @@ import datetime
 import logging
 import os
 import sys
+from dotenv import load_dotenv 
 
 import aiohttp
 
+load_dotenv()
+
 CHANNEL_ID = os.environ.get("TG_CHANNEL_ID")
 API_TOKEN = os.environ.get("TG_BOT_TOKEN")
-DEBUG_USER_ID = 744956396
+DEBUG_USER_ID = 809141580
 API_URL = "https://api.telegram.org"
 
 LOG = logging.getLogger("dead-bot")
@@ -25,6 +26,7 @@ async def send_message(
     chat_id,
     disable_notification=False,
 ):
+    print(API_TOKEN)
     data = {
         "text": msg,
         "chat_id": chat_id,
@@ -58,7 +60,7 @@ async def loop():
                     run_at_date,
                     send_message(
                         session,
-                        "Nixos ещё не умер",
+                        "Жмыкс is alive",
                         CHANNEL_ID,
                     ),
                 )

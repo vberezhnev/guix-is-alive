@@ -7,6 +7,7 @@ USER app
 COPY requirements.txt /app/
 COPY main.py /app/
 
+RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 CMD ["python", "./main.py"]
